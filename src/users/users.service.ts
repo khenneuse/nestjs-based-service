@@ -1,3 +1,4 @@
+import { v4 as uuidV4 } from 'uuid';
 import { Injectable } from '@nestjs/common';
 
 export interface UserDTO {
@@ -20,5 +21,11 @@ export class UsersService {
 
   getUserById(userId: string): UserDTO | undefined {
     return this.allUsers.find((user) => user.id === userId);
+  }
+
+  addUser(name: string, id: string = uuidV4()) {
+    const user = { id, name };
+    this.allUsers.push(user);
+    return user;
   }
 }
